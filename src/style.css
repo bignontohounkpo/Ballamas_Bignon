@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@import url('https://fonts.fontshare.com/css?family=chillax|archivo');
+
+:root {
+  font-family: 'Chillax', 'Archivo', sans-serif; 
+  line-height: 1.5;
+}
+
+/* Ajoutez les classes pour les polices */
+.font-chillax {
+  font-family: 'Chillax', sans-serif; 
+}
+
+.font-archivo {
+  font-family: 'Archivo', sans-serif; 
+}
+
