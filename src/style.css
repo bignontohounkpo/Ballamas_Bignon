@@ -1,17 +1,72 @@
 @import "tailwindcss";
 @import url('https://fonts.fontshare.com/css?family=chillax|archivo');
 
-:root {
-  font-family: 'Chillax', 'Archivo', sans-serif; 
-  line-height: 1.5;
+
+@theme {
+  --color-b--light-gray: #E5E5E5; 
+  --color-b-gray: #C3C3C3; 
+  --color-b-dark-gray: #7E7E7E; 
+  --color-b-black: #1D1D1D; 
+  --color-b-purple: #393158;
+  --color-b-green: #2D5C43;
+  --color-b-olive: #706947;
+  --color-b-ocean: #2A5259;
 }
 
-/* Ajoutez les classes pour les polices */
+
+@layer base {
+  :root {
+    --container-padding: 1rem;
+    --container-sm: 540px;
+    --container-md: 720px;
+    --container-lg: 960px;
+    --container-xl: 1140px;
+    --container-2xl: 1320px;
+  }
+
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+  }
+
+  @media (min-width: 540px) {
+    .container {
+      max-width: var(--container-sm);
+    }
+  }
+
+  @media (min-width: 720px) {
+    .container {
+      max-width: var(--container-md);
+    }
+  }
+
+  @media (min-width: 960px) {
+    .container {
+      max-width: var(--container-lg);
+    }
+  }
+
+  @media (min-width: 1140px) {
+    .container {
+      max-width: var(--container-xl);
+    }
+  }
+
+  @media (min-width: 1320px) {
+    .container {
+      max-width: var(--container-2xl);
+    }
+  }
+}
+
 .font-chillax {
   font-family: 'Chillax', sans-serif; 
 }
 
-.font-archivo {
+body{
   font-family: 'Archivo', sans-serif; 
 }
-
