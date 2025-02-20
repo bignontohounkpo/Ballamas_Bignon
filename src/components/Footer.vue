@@ -1,7 +1,7 @@
 <template>
     <section class="bg-black text-white py-4 footer ">
         <div class="container mx-auto py-5">
-            <div class="grid  lg:grid-cols-2 gap-5 justify-between md:grid-cols-1 sm:grid-cols-1">
+            <div class="grid  lg:grid-cols-2 gap-5 justify-between md:grid-cols-1 sm:grid-cols-1 pl-2">
                 <div>
                     <p class="navbare-logo text-3xl text-white font-chillax">BALLAMAS</p>
                     <p class=" font-archivo justify-center text-md font-medium">Subscribe to our newsletter for upcoming
