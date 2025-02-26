@@ -27,6 +27,7 @@
     </div>
 
   </section>
+  
 </template>
 
 <script>
