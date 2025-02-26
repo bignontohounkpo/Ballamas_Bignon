@@ -6,7 +6,10 @@
     <nav
       class="container pt-5 pb-5 border-b-2 border-b-gray-400 flex justify-between"
     >
-      <div class="flex gap-6">
+      <div
+        v-if="!openmenu || screenSize !== 'lg'"
+        class="flex lg:absolute lg:left-0"
+      >
         <button @click="toggleMenu" class="lg:hidden">
           <img
             :src="
@@ -15,7 +18,7 @@
                 : '/Icons/hambuger-menu.svg'
             "
             alt="Menu"
-            class="w-6 h-6"
+            class="w-8 h-8"
           />
         </button>
       </div>
