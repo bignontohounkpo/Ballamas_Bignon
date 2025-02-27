@@ -4,13 +4,14 @@
 
     <div v-if="loading" class="text-center text-gray-500">Chargement...</div>
 
-    <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-6 justify-items-center">
+    <div v-else
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-6 justify-items-center">
       <div v-for="product in displayedProducts" :key="product.id">
         <div
-          class="relative h-80 w-80 rounded-lg flex flex-col justify-between p-4 group transition-all overflow-hidden"
-          :style="{ backgroundImage: `url(${product.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }"
-        >
-          <div class="absolute inset-0 bg-b-dark-gray opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+          class="relative h-100 w-100 rounded-lg flex flex-col justify-between p-4 group transition-all overflow-hidden"
+          :style="{ backgroundImage: `url(${product.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }">
+          <div class="absolute inset-0 bg-b-dark-gray opacity-0 group-hover:opacity-50 transition-opacity duration-300">
+          </div>
 
           <div class="relative z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <button class="text-b-black bg-white bg-opacity-50 p-2 rounded-full text-xs font-semibold">
@@ -18,7 +19,8 @@
             </button>
           </div>
 
-          <div class="relative z-10 flex justify-around mt-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div
+            class="relative z-10 flex justify-around mt-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <button class="cursor-pointer bg-white text-black rounded-full p-3 font-semibold text-xs flex gap-2">
               <img src="/Icons/cart.svg" alt="Cart" class="w-4 h-4" />
               <p>ADD TO CART</p>
@@ -37,7 +39,8 @@
     </div>
 
     <div class="text-center mt-6">
-      <button @click="toggleProductDisplay" class="px-6 py-2 border rounded-full text-b-black hover:bg-gray-100 transition">
+      <button @click="toggleProductDisplay"
+        class="px-6 py-2 border rounded-full text-b-black hover:bg-gray-100 transition">
         {{ showAll ? "View Less" : "View More" }}
       </button>
     </div>
