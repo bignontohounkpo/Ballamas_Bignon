@@ -25,8 +25,8 @@
               <img src="/Icons/cart.svg" alt="Cart" class="w-4 h-4" />
               <p>ADD TO CART</p>
             </button>
-            <button class="cursor-pointer rounded-full p-3 font-semibold text-xs border-2 border-white text-white">
-              BUY NOW
+            <button class=" uppercase cursor-pointer rounded-full p-3 font-semibold text-xs border-2 border-white text-white">
+              buy bon
             </button>
           </div>
         </div>
