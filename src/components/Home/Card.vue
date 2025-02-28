@@ -41,7 +41,7 @@
     <div class="text-center mt-6">
       <button @click="toggleProductDisplay"
         class="px-6 py-2 border rounded-full text-b-black hover:bg-gray-100 transition">
-        {{ showAll ? "View Less" : "View More" }}
+        {{ showAll ?  "View Less" : " View More" }}
       </button>
     </div>
   </div>
