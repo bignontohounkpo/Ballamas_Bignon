@@ -14,8 +14,8 @@
           </div>
 
           <div class="relative z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <button class="text-b-black bg-white bg-opacity-50 p-2 rounded-full text-xs font-semibold">
-              GET OFF 20%
+            <button class="text-b-black bg-white bg-opacity-50 p-2 rounded-full text-xs font-semibold uppercase">
+              Get off 20%
             </button>
           </div>
 
@@ -23,7 +23,7 @@
             class="relative z-10 flex justify-around mt-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <button class="cursor-pointer bg-white text-black rounded-full p-3 font-semibold text-xs flex gap-2">
               <img src="/Icons/cart.svg" alt="Cart" class="w-4 h-4" />
-              <p>ADD TO CART</p>
+              <p class="uppercase ">Add to cart</p>
             </button>
             <button class=" uppercase cursor-pointer rounded-full p-3 font-semibold text-xs border-2 border-white text-white">
               buy bon
@@ -31,7 +31,7 @@
           </div>
         </div>
 
-        <div class="text-black py-2 mt-1 ">
+        <div class="text-b-black py-2 mt-1 ">
           <h2 class="text-2xl font-semibold text-b-black uppercase">{{ product.title }}</h2>
           <p class="text-sm font-bold text-b-dark-gray">{{ product.price }} {{ product.currency }}</p>
         </div>
@@ -41,7 +41,7 @@
     <div class="text-center mt-6">
       <button @click="toggleProductDisplay"
         class="px-6 py-2 border rounded-full text-b-black hover:bg-gray-100 transition">
-        {{ showAll ?  "View Less" : " View More" }}
+        {{ showAll ? "View Less" : "View More" }}
       </button>
     </div>
   </div>
