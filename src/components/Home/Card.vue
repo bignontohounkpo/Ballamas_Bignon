@@ -23,7 +23,7 @@
 
     <div
       v-else
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-6 justify-items-center"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center overflow-hidden"
     >
       <div v-for="product in displayedProducts" :key="product.id">
         <div
@@ -146,6 +146,7 @@ const fetchCollections = async () => {
 
   const data = await response.json();
   let totalProducts = [];
+  console.log(data)
 
   collections.value = data.data.collections.edges.map(({ node }) => {
     const productsInCollection = node.products.edges.map(({ node }) => ({
