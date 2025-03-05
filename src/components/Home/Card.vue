@@ -1,65 +1,47 @@
 <template>
-  <div class="container mx-auto py-10 place-items-center">
-    <h1 class="text-3xl font-bold text-center mb-8">Produits</h1>
-
+  <div  class="container mx-auto py-10 place-items-center ">
     <!-- Boutons de sélection des collections -->
-    <div class="flex gap-3 py-4 justify-center">
-      <button
-        v-for="collection in collections"
-        :key="collection.id"
-        @click="fetchProductsByCollection(collection.id)"
-        class="px-4 py-2 rounded-full border flex items-center gap-1 font-semibold"
-        :class="{
+    <div class="flex flex-wrap gap-2 py-4 justify-start lg:justify-center">
+      <button v-for="collection in collections" :key="collection.id" @click="fetchProductsByCollection(collection.id)"
+        class="px-4 py-2 rounded-full border flex items-center gap-1 font-semibold" :class="{
           'bg-black text-white': selectedCollection === collection.id,
           'bg-white text-black border-black':
             selectedCollection !== collection.id,
-        }"
-      >
+        }">
         <span>{{ collection.title }} ({{ collection.count }})</span>
       </button>
     </div>
 
     <div v-if="loading" class="text-center text-gray-500">Chargement...</div>
 
-    <div
-      v-else
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center overflow-hidden"
-    >
-      <div v-for="product in displayedProducts" :key="product.id">
+    <div v-else
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 sm:gap-16 md:gap-8 lg:gap-8 w-full justify-items-center ">
+      <div v-for="product in displayedProducts" :key="product.id" class="cursor-pointer"
+        @click="DetailView(product.id)">
         <div
-          class="relative h-100 w-100 rounded-lg flex flex-col justify-between p-4 group transition-all overflow-hidden"
+          class="relative h-100 w-80 xl:w-96 rounded-lg flex flex-col justify-between p-4 group transition-all overflow-hidden"
           :style="{
             backgroundImage: `url(${product.image})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-          }"
-        >
-          <div
-            class="absolute inset-0 bg-b-dark-gray opacity-0 group-hover:opacity-50 transition-opacity duration-300"
-          ></div>
+          }">
+          <div class="w-full absolute inset-0 bg-b-dark-gray opacity-0 group-hover:opacity-50 transition-opacity duration-300">
+          </div>
 
-          <div
-            class="relative z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          >
-            <button
-              class="text-b-black bg-white bg-opacity-50 p-2 rounded-full text-xs font-semibold uppercase"
-            >
+          <div class="relative z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <button class="text-b-black bg-white bg-opacity-50 p-2 rounded-full text-xs font-semibold uppercase">
               Get off 20%
             </button>
           </div>
 
           <div
-            class="relative z-10 flex justify-around mt-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          >
-            <button
-              class="cursor-pointer bg-white text-black rounded-full p-3 font-semibold text-xs flex gap-2"
-            >
+            class="relative z-10 flex justify-around mt-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <button class="cursor-pointer bg-white text-black rounded-full p-3 font-semibold text-xs flex gap-2">
               <img src="/Icons/cart.svg" alt="Cart" class="w-4 h-4" />
               <p class="uppercase">Add to cart</p>
             </button>
             <button
-              class="uppercase cursor-pointer rounded-full p-3 font-semibold text-xs border-2 border-white text-white"
-            >
+              class="uppercase cursor-pointer rounded-full p-3 font-semibold text-xs border-2 border-white text-white">
               Buy now
             </button>
           </div>
@@ -77,10 +59,7 @@
     </div>
 
     <div class="flex justify-center mt-6">
-      <button
-        @click="toggleView"
-        class="px-4 py-2 bg-black text-white rounded-full font-semibold"
-      >
+      <button @click="toggleView" class="px-4 py-2 bg-black text-white rounded-full font-semibold">
         {{ showAll ? "View Less" : "View More" }}
       </button>
     </div>
@@ -89,7 +68,11 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
+import { useRoute, useRouter } from 'vue-router';
 
+
+const route = useRoute()
+const router = useRouter()
 const products = ref([]);
 const collections = ref([]);
 const allProducts = ref([]);
@@ -146,8 +129,6 @@ const fetchCollections = async () => {
 
   const data = await response.json();
   let totalProducts = [];
-  console.log(data)
-
   collections.value = data.data.collections.edges.map(({ node }) => {
     const productsInCollection = node.products.edges.map(({ node }) => ({
       id: node.id,
@@ -193,6 +174,14 @@ const fetchProductsByCollection = (collectionId) => {
 
   loading.value = false;
 };
+const DetailView = (ide) => { 
+const id=ide.split("/")
+router.push(`/Details/${id[id.length-1]}`)
+  // console.log(ide)
+  // const id = ide.split('/')
+  // router.push(`/Details/${id[id.length - 1]}`);
+};
+console.log(route)
 
 onMounted(fetchCollections);
 </script>
