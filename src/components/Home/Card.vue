@@ -176,12 +176,12 @@ const fetchProductsByCollection = (collectionId) => {
 };
 const DetailView = (ide) => { 
 const id=ide.split("/")
-router.push(`/Details/${id[id.length-1]}`)
+router.push(`/details/${id[id.length-1]}`)
   // console.log(ide)
   // const id = ide.split('/')
   // router.push(`/Details/${id[id.length - 1]}`);
 };
-console.log(route)
+
 
 onMounted(fetchCollections);
 </script>
