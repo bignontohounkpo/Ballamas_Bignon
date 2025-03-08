@@ -2,9 +2,9 @@
     <div v-if="loading">Chargement...</div>
     <div v-else>
       <div v-if="products.length > 0">
-        <div v-for="product in products" :key="product.id" class="flex gap-8 bg-gray-100 p-6 rounded-lg">
+        <div v-for="product in products" :key="product.id" class="flex gap-8 bg-gray-100 p-6 rounded-lg flex-wrap">
           <!-- Image du produit -->
-          <img :src="selectedImage" alt="Product image" class="w-1/3 rounded-lg shadow-md" />
+          <img :src="selectedImage" alt="Product image" class="w-2/3 rounded-lg shadow-sm" />
   
           <!-- Détails du produit -->
           <div class="w-2/3">
@@ -107,7 +107,7 @@
           featuredImage {
             url
           }
-          variants(first: 10) {
+          variants(first: 4) {
             edges {
               node {
                 id
