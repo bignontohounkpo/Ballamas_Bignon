@@ -3,18 +3,18 @@
     <div v-if="loading" class="">Chargement...</div>
     <div v-else>
       <div v-if="products.length > 0">
-        <div v-for="product in products" :key="product.id" class="lg:justify-start justify-center   flex-wrap flex lg:flex-nowrap gap-2 bg-gray-100 p-6 rounded-lg ">
+        <div v-for="product in products" :key="product.id" class=" lg:justify-start justify-center flex-wrap flex lg:flex-nowrap gap-5  lg:items-center p-6 rounded-lg ">
           <!-- Image du produit -->
-          <img :src="selectedImage" alt="Product image" class="lg:w-1/3 w-2/3 rounded-lg shadow-sm" />
+          <img :src="selectedImage" alt="Product image" class="lg:w-1/3 w-3/3 rounded-xl " />
   
           <!-- Détails du produit -->
-          <div class="w-2/3">
+          <div class="w-3/3 ">
             <h2 class="text-2xl font-semibold">{{ product.title }}</h2>
-            <p class="text-xl font-bold text-gray-700">CAD$ {{ selectedVariant?.price }}</p>
+            <p class="text-xl font-bold text-gray-700">CAD ${{ selectedVariant?.price }}</p>
   
             <!-- Sélection de la couleur -->
             <div class="mt-4">
-              <p class="font-semibold">Color: {{ selectedColor }}</p>
+              <p class="font-semibold text-2xl">Color: {{ selectedColor }}</p>
               <div class="flex gap-2 mt-2">
                 <button 
                   v-for="(image, color) in colorImages" 
@@ -29,7 +29,7 @@
   
             <!-- Sélection de la taille -->
             <div class="mt-4">
-              <p class="font-semibold">Size:</p>
+              <p class="font-semibold text-2xl">Size:</p>
               <div class="flex gap-2 mt-2">
                 <button 
                   v-for="size in availableSizes" 
@@ -51,8 +51,8 @@
   
             <!-- Description -->
             <div class="mt-4">
-              <p class="font-semibold text-lg">Description</p>
-              <p class="text-gray-600">{{ product.description }}</p>
+              <p class="font-semibold text-2xl">Description</p>
+              <p class="text-b-black text-xl">{{ product.description }}</p>
             </div>
           </div>
         </div>
