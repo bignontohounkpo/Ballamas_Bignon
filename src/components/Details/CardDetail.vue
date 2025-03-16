@@ -137,9 +137,7 @@
         body: JSON.stringify({ query }),
       });
   
-      const data = await response.json();
-      console.log("Données reçues :", data); // Vérification de la réponse API
-  
+      const data = await response.json();  
       if (data?.data?.product) {
         const product = data.data.product;
         const variants = product.variants.edges.map(({ node }) => ({
