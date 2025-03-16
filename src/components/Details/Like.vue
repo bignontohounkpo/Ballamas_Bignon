@@ -10,12 +10,12 @@
 
   <div 
     v-else 
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10 md:gap-10 lg:gap-16 max-w-full  justify-items-center"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10 md:gap-10 lg:gap-12  justify-items-center"
   >
     <div 
       v-for="product in randomProducts" 
       :key="product.id" 
-      class="cursor-pointer w-full sm:w-80 md:w-80 lg:w-72 xl:w-80"
+      class="cursor-pointer w-full sm:w-80 md:w-80 lg:w-60 xl:w-80"
       @click="DetailView(product.id)"
     >
       <div
