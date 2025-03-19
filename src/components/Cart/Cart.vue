@@ -17,8 +17,9 @@
             <img :src="item.image" :alt="item.title" class="w-24 h-24 object-cover rounded-md">
             <div class="ml-4 flex-grow">
               <h3 class="text-lg font-semibold">{{ item.title }}</h3>
+              <p class="text-gray-600">Color: {{ item.color }}</p>
               <p class="text-gray-600">Size: {{ item.size }}</p>
-              <p class="text-gray-800 font-bold">{{ item.price }} {{ item.currency }}</p>
+              <p class="text-gray-800 font-bold">${{ item.price }}</p>
             </div>
             <div class="flex items-center space-x-2">
               <button @click="decrementQuantity(item)" class="p-1 rounded-full bg-gray-100 hover:bg-gray-200">
@@ -65,74 +66,62 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const cartItems = ref([]);
 
-// Computed properties for order summary
+// Charger les données du localStorage
+onMounted(() => {
+  const savedCart = localStorage.getItem("cartItems");
+  cartItems.value = savedCart ? JSON.parse(savedCart) : [];
+});
+
+// Calcul du sous-total
 const subtotal = computed(() => {
-  return cartItems.value.reduce((total, item) => {
-    return total + (parseFloat(item.price) * item.quantity);
-  }, 0);
+  return cartItems.value.reduce((total, item) => total + (parseFloat(item.price) * item.quantity), 0);
 });
 
-const discount = computed(() => {
-  // Apply 20% discount if cart has items
-  return cartItems.value.length > 0 ? subtotal.value * 0.2 : 0;
-});
+// Calcul de la remise (20%)
+const discount = computed(() => (cartItems.value.length > 0 ? subtotal.value * 0.2 : 0));
 
-const total = computed(() => {
-  return subtotal.value - discount.value;
-});
+// Calcul du total
+const total = computed(() => subtotal.value - discount.value);
 
-// Cart operations
+// Fonctions de gestion du panier
 const incrementQuantity = (item) => {
   item.quantity++;
+  updateLocalStorage();
 };
 
 const decrementQuantity = (item) => {
   if (item.quantity > 1) {
     item.quantity--;
+    updateLocalStorage();
   }
 };
 
 const removeItem = (item) => {
-  const index = cartItems.value.indexOf(item);
-  if (index > -1) {
-    cartItems.value.splice(index, 1);
-  }
+  cartItems.value = cartItems.value.filter(i => i.id !== item.id);
+  updateLocalStorage();
 };
 
 const clearCart = () => {
   cartItems.value = [];
+  localStorage.removeItem("cartItems");
+};
+
+const updateLocalStorage = () => {
+  localStorage.setItem("cartItems", JSON.stringify(cartItems.value));
 };
 
 const checkout = () => {
-  // Implement checkout logic here
   console.log('Proceeding to checkout...');
 };
+onMounted(() => {
+  const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+  cartItems.value = savedCart;
+});
 
-// Initialize with some sample data (remove this in production)
-cartItems.value = [
-  {
-    id: 1,
-    title: 'Slides',
-    size: 'Small',
-    price: '25.0',
-    currency: 'USD',
-    quantity: 1,
-    image: 'https://via.placeholder.com/150'
-  },
-  {
-    id: 2,
-    title: 'Sweatpants',
-    size: 'Small',
-    price: '35.0',
-    currency: 'USD',
-    quantity: 1,
-    image: 'https://via.placeholder.com/150'
-  }
-];
 </script>

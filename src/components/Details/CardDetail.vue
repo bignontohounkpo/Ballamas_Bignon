@@ -86,9 +86,28 @@ const updateAvailableSizes = (color) => {
   }
 };
 
+// ✅ Fonction pour sauvegarder les détails du produit dans le localStorage
+const saveProductDetails = () => {
+  if (products.value.length > 0 && selectedVariant.value) {
+    const productDetails = {
+      id:products.value[0].id,
+      title: products.title,
+      image: selectedImage.value,
+      price: selectedVariant.value.price,
+      color: selectedColor.value,
+      size: selectedSize.value,
+    };
+
+    // Stocker les détails dans le localStorage
+    localStorage.setItem("productDetails", JSON.stringify(productDetails));
+  }
+};
+
 const toggleCart = () => {
+  const existingCart = JSON.parse(localStorage.getItem("cartItems")) || []; // 🔥 Récupérer l'ancien panier
+  
   if (!isInCart.value) {
-    cartItems.value.push({
+    const newItem = {
       id: products.value[0].id,
       title: products.value[0].title,
       size: selectedSize.value,
@@ -96,9 +115,13 @@ const toggleCart = () => {
       currency: "CAD",
       quantity: 1,
       image: selectedImage.value
-    });
+    };
+
+    existingCart.push(newItem); // 🔥 Ajouter au panier existant
+    localStorage.setItem("cartItems", JSON.stringify(existingCart)); // 🔥 Sauvegarder sans écraser
     isInCart.value = true;
   } else {
+    saveProductDetails();
     router.push("/cart");
   }
 };
