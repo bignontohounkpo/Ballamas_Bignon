@@ -194,7 +194,7 @@ const DetailsCard = async () => {
         description: product.description || "Pas de description disponible.",
         image: product.featuredImage?.url || "https://via.placeholder.com/200",
         price: variants[0]?.price || "N/A",
-        currency: variants[0]?.currency || "",
+        currency: variants[0]?.currency || "" ,
         variants,
       }];
 
