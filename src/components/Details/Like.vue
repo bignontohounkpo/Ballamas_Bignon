@@ -10,7 +10,7 @@
 
   <div 
     v-else 
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10 md:gap-10 lg:gap-12  justify-items-center"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10 md:gap-10 lg:gap-14  justify-items-center"
   >
     <div 
       v-for="product in randomProducts" 
@@ -35,9 +35,12 @@
         </div>
 
         <div class="relative z-10 flex justify-around mt-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <button class="cursor-pointer bg-white text-black rounded-full p-3 font-semibold text-xs flex gap-2">
-            <img src="/Icons/cart.svg" alt="Cart" class="w-4 h-4" />
-            <p class="uppercase">Add to cart</p>
+          <button 
+            class="cursor-pointer bg-white text-black rounded-full p-3 font-semibold text-xs flex gap-2"
+            @click.stop="handleCartAction(product)"
+          >
+            <img :src="product.inCart ? '/Icons/eye.svg' : '/Icons/cart.svg'" alt="Cart" class="w-4 h-4" />
+            <p class="uppercase">{{ product.inCart ? 'View cart' : 'Add to cart' }}</p>
           </button>
           <button class="uppercase cursor-pointer rounded-full p-3 font-semibold text-xs border-2 border-white text-white">
             Buy now
@@ -56,8 +59,6 @@
     </div>
   </div>
 </div>
-
-
 </template>
 
 <script setup>
@@ -104,7 +105,7 @@ const fetchProducts = async () => {
     });
 
     const data = await response.json();
-    console.log("Données reçues :", data); // DEBUG: Voir la réponse API
+    console.log("Données reçues :", data);
 
     if (data?.data?.products) {
       products.value = data.data.products.edges.map(({ node }) => ({
@@ -113,9 +114,9 @@ const fetchProducts = async () => {
         image: node.featuredImage?.url || "https://via.placeholder.com/150",
         price: node.priceRange.minVariantPrice.amount,
         currency: node.priceRange.minVariantPrice.currencyCode,
+        inCart: false
       }));
 
-      // Mélange et sélection de 4 produits aléatoires
       randomProducts.value = products.value.sort(() => 0.5 - Math.random()).slice(0, 4);
     } else {
       error.value = "Aucun produit reçu de l'API.";
@@ -126,10 +127,21 @@ const fetchProducts = async () => {
     loading.value = false;
   }
 };
+
 const DetailView = (ide) => {
   const id = ide.split("/")
   router.push(`details/${id[id.length - 1]}`)
 }
+
+const handleCartAction = (product) => {
+  if (product.inCart) {
+    router.push('/cart');
+  } else {
+    product.inCart = true;
+    // Add product to cart logic here
+    console.log('Added to cart:', product);
+  }
+};
 
 onMounted(fetchProducts);
 </script>
