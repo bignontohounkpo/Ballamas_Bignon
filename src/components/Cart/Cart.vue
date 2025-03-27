@@ -68,8 +68,10 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 
 const router = useRouter();
+const route =useRoute()
 const cartItems = ref([]);
 
 // Charger les données du localStorage
@@ -123,5 +125,6 @@ onMounted(() => {
   const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
   cartItems.value = savedCart;
 });
+
 
 </script>

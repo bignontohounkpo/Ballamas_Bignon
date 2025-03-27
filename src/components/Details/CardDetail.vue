@@ -32,7 +32,7 @@
             </div>
 
             <div class="mt-6 flex gap-4">
-              <button class="bg-black text-white px-6 py-2 rounded-lg font-semibold">BUY NOW</button>
+              <button @click="achat" class="bg-black text-white px-6 py-2 rounded-lg font-semibold">BUY NOW</button>
               <button @click="toggleCart" class="border px-6 py-2 rounded-lg font-semibold">
                 {{ isInCart ? 'VIEW CART' : 'ADD TO CART' }}
               </button>
@@ -208,6 +208,9 @@ const DetailsCard = async () => {
     loading.value = false;
   }
 };
+const achat= ()=> {
+ router.push('/payement')
+}
 
 onMounted(DetailsCard);
 </script>
