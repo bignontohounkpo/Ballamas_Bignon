@@ -2,7 +2,7 @@
  <div>
     <Navbar />
     <router-view /> 
-    <Footer />
+    <Footer/>
   </div>
 </template>
 
@@ -12,5 +12,4 @@ import Footer from './components/Footer.vue';
 // import HomePage from './Pages/HomePage.vue';
 </script>
 <style scoped>
-
 </style>
